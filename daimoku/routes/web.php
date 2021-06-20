@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/artisan/{param}', function ($param) {
+
+    print "<br> Comando: <samp>artisan $param </samp>";
+    print '<br> Retorno: <samp>' . Artisan::call($param) . '</samp>';
+    print '<br> Console: <br>';
+    print '<pre>' . Artisan::output() . '</pre>';
+
+
+    return '<br>';
+});
