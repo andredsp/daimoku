@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attendance;
+use App\Models\Room;
+use App\Models\RoomBlock;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +17,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Attendance::truncate();
+        Room::truncate();
+        RoomBlock::truncate();    
+        User::truncate();
+
+        $user = User::factory(10)->create();
+        $room = Room::factory(3)->create();
+        $attendance = Attendance::factory(6)->create();
+        $rb = RoomBlock::factory(10)->create();
     }
 }

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoomController;
+use App\Models\Room;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +22,28 @@ Route::get('/', function () {
 
 Route::get('/artisan/{param}', function ($param) {
 
-    print "<br> Comando: <samp>artisan $param </samp>";
-    print '<br> Retorno: <samp>' . Artisan::call($param) . '</samp>';
-    print '<br> Console: <br>';
-    print '<pre>' . Artisan::output() . '</pre>';
+    print "<br/> <strong>Comando:</strong> <samp>artisan $param </samp>";
+    print '<br/> <strong>Retorno:</strong> <samp>' . Artisan::call($param) . '</samp>';
+    print '<br/> <strong>Console:</strong> <br/>';
+    print '<pre style="color: white;background: black;padding: 5px;">' . Artisan::output() . '</pre>';
 
 
     return '<br>';
 });
+
+// Route::resource('salas', RoomController::class);
+
+Route::get('salas', function () {
+    return view('rooms', [
+        'rooms' => Room::all(),
+    ]);
+});
+
+
+Route::get('salas/{room:slug}', function (Room $room) {
+    return view('room', [
+        'room' => $room,
+    ]);
+});
+
+// Route::get('/user/{id}', [UserController::class, 'show']);
