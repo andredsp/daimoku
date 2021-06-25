@@ -11,6 +11,8 @@ class Room extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['attendances', 'blocks'];
+
     public function attendances()
     {
         return $this->hasMany(Attendance::class);

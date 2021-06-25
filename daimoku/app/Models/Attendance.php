@@ -11,6 +11,8 @@ class Attendance extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['user'];
+
     public function room()
     {
         return $this->belongsTo(Room::class);
