@@ -19,7 +19,7 @@ class CreateRoomsTable extends Migration
             $table->string('slug')->unique();
             $table->string('title')->unique();
             $table->time('time_limit')->nullable();
-            $table->time('block_time')->nullable();
+            $table->time('block_time');
 
         });
     }

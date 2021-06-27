@@ -24,6 +24,7 @@ class RoomFactory extends Factory
         return [
             'slug' => $this->faker->slug,
             'title' => 'Sala ' . $this->faker->country,
+            'block_time' => '00:05',
         ];
     }
 }
