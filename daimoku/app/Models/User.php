@@ -45,4 +45,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Attendance::class);
     }
+
+    public function leaveAllRooms() {
+        $open_attendances = $this->attendances()->whereNull('left_at')->get();
+        foreach ($open_attendances as $attendance) {
+            $attendance->left_at = now();
+            $attendance->save();
+        }
+    }
+
+    public function enterRoom(Room $room) {
+        $this->leaveAllRooms();
+
+        // Create new attendance
+        $attendance = new Attendance();
+        $attendance->room()->associate($room);
+        $this->attendances()->save($attendance);
+    }
 }

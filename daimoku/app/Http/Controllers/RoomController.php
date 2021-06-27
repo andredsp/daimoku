@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Room;
 
@@ -15,6 +16,8 @@ class RoomController extends Controller
      */
     public function index()
     {
+        Auth::user()->leaveAllRooms();
+
         return view('rooms', [
             'rooms' => Room::all(),
         ]);
@@ -49,6 +52,9 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
+        Auth::user()->enterRoom($room);
+        $room->refresh(); // reload model
+
         return view('room', [
             'room' => $room,
         ]);
