@@ -1,28 +1,42 @@
-<!DOCTYPE html>
-<title>
-    Sala X
-</title>
-<link href="/app.css" rel="stylesheet" type="text/css">
-    <body>
-        <room>
-            <h1> {{ $room->title }} </h1>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ $room->title }}
+        </h2>
+    </x-slot>
 
-            <h2> Blocos </h2>
-            <code>
-                @foreach ($room->blocks as $block)
-                	{{ $block->user->name[0] }}
-            	@endforeach
-            </code>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <h3> Blocos </h3>
+                    <code>
+                        @foreach ($room->blocks as $block)
+                        {{ $block->user->name[0] }}
+                        @endforeach
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <h2> Participantes </h2>
-            <ul>
-	            @foreach ($room->attendances as $attendance)
-		            <li>{{ $attendance->user->name }}</li>
-            	@endforeach		            
-            </ul>            
-        </room>
-        <a href="/salas">
-            Voltar
-        </a>
-    </body>
-</link>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <h2> Participantes </h2>
+                    <ul>
+                        @foreach ($room->attendances as $attendance)
+                        <li>{{ $attendance->user->name }}</li>
+                        @endforeach                 
+                    </ul> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="/salas">
+        Voltar
+    </a>
+
+</x-app-layout>
