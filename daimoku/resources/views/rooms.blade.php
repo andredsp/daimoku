@@ -1,4 +1,3 @@
-@include('layouts.navigation')
 
 <x-guest-layout>
     <x-slot name="header">
