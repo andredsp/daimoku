@@ -16,7 +16,7 @@ use App\Models\Room;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -31,25 +31,22 @@ Route::get('/artisan/{param}', function ($param) {
     return '<br>';
 });
 
+Route::redirect('/', '/salas');
 // Route::resource('salas', RoomController::class);
-
 Route::get('salas', function () {
     return view('rooms', [
         'rooms' => Room::all(),
     ]);
-});
+})
+// ->middleware(['guest'])
+    ->name('salas')
+;
 
 
 Route::get('salas/{room:slug}', function (Room $room) {
     return view('room', [
         'room' => $room,
     ]);
-});
-
-// Route::get('/user/{id}', [UserController::class, 'show']);
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth']);
 
 require __DIR__.'/auth.php';
