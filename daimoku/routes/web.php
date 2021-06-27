@@ -32,21 +32,11 @@ Route::get('/artisan/{param}', function ($param) {
 });
 
 Route::redirect('/', '/salas');
-// Route::resource('salas', RoomController::class);
-Route::get('salas', function () {
-    return view('rooms', [
-        'rooms' => Room::all(),
-    ]);
-})
+Route::get('/salas', [RoomController::class, 'index'])
 // ->middleware(['guest'])
-    ->name('salas')
-;
+    ->name('salas');
 
-
-Route::get('salas/{room:slug}', function (Room $room) {
-    return view('room', [
-        'room' => $room,
-    ]);
-})->middleware(['auth']);
+Route::get('/salas/{room:slug}', [RoomController::class, 'show'])
+->middleware(['auth']);
 
 require __DIR__.'/auth.php';
