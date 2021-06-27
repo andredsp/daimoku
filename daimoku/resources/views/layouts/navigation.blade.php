@@ -5,15 +5,16 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('salas') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                    <a href="/">
+{{--                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" /> --}}
+                        <x-label>Centro Virtual de Daimoku</x-label>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('salas')" :active="request()->routeIs('salas')">
-                        {{ __('Salas') }}
+                    <x-nav-link :href="route('entrada')" :active="request()->routeIs('entrada')">
+                        {{ __('Saguão de Entrada') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -63,8 +64,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('salas')" :active="request()->routeIs('salas')">
-                {{ __('Salas') }}
+            <x-responsive-nav-link :href="route('entrada')" :active="request()->routeIs('entrada')">
+                {{ __('Saguão de Entrada') }}
             </x-responsive-nav-link>
         </div>
 

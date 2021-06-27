@@ -35,8 +35,4 @@
         </div>
     </div>
 
-    <a href="/salas">
-        Voltar
-    </a>
-
 </x-app-layout>

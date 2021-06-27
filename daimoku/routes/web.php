@@ -16,10 +16,6 @@ use App\Models\Room;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
 Route::get('/artisan/{param}', function ($param) {
 
     print "<br/> <strong>Comando:</strong> <samp>artisan $param </samp>";
@@ -31,10 +27,10 @@ Route::get('/artisan/{param}', function ($param) {
     return '<br>';
 });
 
-Route::redirect('/', '/salas');
-Route::get('/salas', [RoomController::class, 'index'])
+Route::redirect('/', '/entrada');
+Route::get('/entrada', [RoomController::class, 'index'])
 // ->middleware(['guest'])
-    ->name('salas');
+    ->name('entrada');
 
 Route::get('/salas/{room:slug}', [RoomController::class, 'show'])
 ->middleware(['auth']);
