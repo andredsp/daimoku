@@ -47,3 +47,9 @@ Route::get('salas/{room:slug}', function (Room $room) {
 });
 
 // Route::get('/user/{id}', [UserController::class, 'show']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

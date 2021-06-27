@@ -1,3 +1,3 @@
 require('./bootstrap');
 
-import 'clockwork-browser/toolbar'
+require('alpinejs');
