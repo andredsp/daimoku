@@ -15,7 +15,10 @@ class RoomController extends Controller
      */
     public function index()
     {
-        Auth::user()->leaveAllRooms();
+        if (Auth::check()) {
+            // The user is logged in...
+            Auth::user()->leaveAllRooms();
+        }
 
         return view('rooms', [
             'rooms' => Room::all(),
