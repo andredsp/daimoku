@@ -22,4 +22,11 @@ class Attendance extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function leave()
+    {
+        $this->left_at = now();
+        $this->save();
+        $this->room->syncBlocks();
+    }
 }

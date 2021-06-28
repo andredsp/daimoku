@@ -22,4 +22,14 @@ class Room extends Model
     {
         return $this->hasMany(RoomBlock::class);
     }
+
+    public function syncBlocks()
+    {
+        // - get room's total time
+
+        // - get room's total block time
+
+        // - if block total time differ
+        //     - create missing blocks
+    }
 }

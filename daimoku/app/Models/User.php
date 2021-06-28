@@ -46,15 +46,18 @@ class User extends Authenticatable
         return $this->hasMany(Attendance::class);
     }
 
-    public function leaveAllRooms() {
+    public function leaveAllRooms()
+    {
         $open_attendances = $this->attendances()->whereNull('left_at')->get();
         foreach ($open_attendances as $attendance) {
-            $attendance->left_at = now();
-            $attendance->save();
+            $attendance->leave();
         }
     }
 
-    public function enterRoom(Room $room) {
+    public function enterRoom(Room $room)
+    {
+        // TODO: check if user is already attending given room
+
         $this->leaveAllRooms();
 
         // Create new attendance
