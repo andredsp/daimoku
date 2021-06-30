@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -53,9 +54,26 @@ class User extends Authenticatable
         }
     }
 
+
+    public function isAt(Room $room): bool
+    {
+        // Retrieve posts with at least one comment containing words like code%...
+        $openAttendances = $this->whereHas('attendances', function (Builder $query) use ($room) {
+            $query
+                ->where('room_id', $room->id)
+                ->whereNull('left_at');
+        })->count();
+
+
+        return $openAttendances > 0;
+    }
+
     public function enterRoom(Room $room)
     {
-        // TODO: check if user is already attending given room
+        // Check if user is already attending given room
+        if ($this->isAt($room)) {
+            return;
+        }
 
         $this->leaveAllRooms();
 
