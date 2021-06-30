@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Attendance::truncate();
-        Room::truncate();
-        RoomBlock::truncate();    
-        User::truncate();
+        // RoomBlock::truncate();    
+        // Attendance::truncate();
+        // Room::truncate();
+        // User::truncate();
 
         $user = User::factory(10)->create();
         $room = Room::factory(3)->create();

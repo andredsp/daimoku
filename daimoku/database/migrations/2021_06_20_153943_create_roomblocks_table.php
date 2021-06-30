@@ -16,10 +16,10 @@ class CreateRoomblocksTable extends Migration
         Schema::create('room_blocks', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('room_id');
+            $table->foreignId('room_id')->constrained();
             $table->integer('pos_x');
             $table->integer('pos_y');
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained();
         });
     }
 
