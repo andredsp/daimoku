@@ -58,12 +58,10 @@ class User extends Authenticatable
     public function isAt(Room $room): bool
     {
         // Retrieve posts with at least one comment containing words like code%...
-        $openAttendances = $this->whereHas('attendances', function (Builder $query) use ($room) {
-            $query
-                ->where('room_id', $room->id)
-                ->whereNull('left_at');
-        })->count();
-
+        $openAttendances = $this->attendances()
+            ->where('room_id', $room->id)
+            ->whereNull('left_at')
+            ->count();
 
         return $openAttendances > 0;
     }
