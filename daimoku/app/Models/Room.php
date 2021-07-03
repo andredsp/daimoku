@@ -44,18 +44,20 @@ class Room extends Model
         foreach ($attendances_time as $user_id => $total_current_time) {
             $expected_blocks = (int) ($total_current_time / $this->block_seconds);
             $missing_blocks = $expected_blocks - ($current_blocks[$user_id] ?? 0);
-            RoomBlock::insert(
-                array_fill(0, $missing_blocks, 
-                    [
-                        'room_id' => $this->id, 
-                        'user_id' => $user_id,
-                        'pos_x' => 0, 
-                        'pos_y' => 0,
-                        'updated_at' => $now,
-                        'created_at' => $now, 
-                    ]
-                )
-            );
+            if ($missing_blocks > 0) {
+                RoomBlock::insert(
+                    array_fill(0, $missing_blocks, 
+                        [
+                            'room_id' => $this->id, 
+                            'user_id' => $user_id,
+                            'pos_x' => 0, 
+                            'pos_y' => 0,
+                            'updated_at' => $now,
+                            'created_at' => $now, 
+                        ]
+                    )
+                );
+            }
         }
 
     }
