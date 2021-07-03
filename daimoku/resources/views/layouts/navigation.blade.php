@@ -5,7 +5,7 @@
             <div class="flex max-w-sm">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="/">
+                    <a href="{{ route('entrada') }}">
 {{--                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" /> --}}
                         <x-label>Centro Virtual de Daimoku</x-label>
                     </a>

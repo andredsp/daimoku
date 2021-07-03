@@ -27,7 +27,7 @@ Route::get('/artisan/{param}', function ($param) {
     return '<br>';
 });
 
-Route::redirect('/', '/entrada');
+Route::redirect('/', 'entrada');
 Route::get('/entrada', [RoomController::class, 'index'])
 // ->middleware(['guest'])
     ->name('entrada');

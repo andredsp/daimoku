@@ -14,7 +14,7 @@
                     @foreach ($rooms as $room)
                     <room>
                         <h3>
-                            <a href="/sala/{{ $room->slug }}"> {{ $room->title }} </a>
+                            <a href="sala/{{ $room->slug }}"> {{ $room->title }} </a>
                         </h3>
                     </room>
                     @endforeach
