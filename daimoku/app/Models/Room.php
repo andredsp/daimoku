@@ -29,7 +29,7 @@ class Room extends Model
     {
         // Get room's total time (by user)
         $attendances_time = $this->attendances()->select('user_id', 
-            DB::raw('SUM(COALESCE(left_at, NOW()) - entered_at) total_current_time'))
+            DB::raw('SUM(TIMESTAMPDIFF(SECOND, entered_at, COALESCE(left_at, NOW()))) total_current_time'))
         ->groupBy('user_id')
         ->pluck('total_current_time', 'user_id');
 
