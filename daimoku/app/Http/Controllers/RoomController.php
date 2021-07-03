@@ -57,6 +57,8 @@ class RoomController extends Controller
         Auth::user()->enterRoom($room);
         $room->refresh(); // reload model
 
+        $room->syncBlocks();
+
         return view('room', [
             'room' => $room,
         ]);
