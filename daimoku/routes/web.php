@@ -32,7 +32,7 @@ Route::get('/entrada', [RoomController::class, 'index'])
 // ->middleware(['guest'])
     ->name('entrada');
 
-Route::get('/salas/{room:slug}', [RoomController::class, 'show'])
+Route::get('/sala/{room:slug}', [RoomController::class, 'show'])
 ->middleware(['auth']);
 
 require __DIR__.'/auth.php';
