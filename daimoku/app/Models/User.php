@@ -58,12 +58,18 @@ class User extends Authenticatable
     public function isAt(Room $room): bool
     {
         // Retrieve posts with at least one comment containing words like code%...
-        $openAttendances = $this->attendances()
+        $openAttendance = $this->attendances()
             ->where('room_id', $room->id)
             ->whereNull('left_at')
-            ->count();
+            ->first();
 
-        return $openAttendances > 0;
+        if ($openAttendance) {
+            // If user is already attending, keep it alive (active)
+            $openAttendance->touch();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function enterRoom(Room $room)
