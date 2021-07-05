@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             Attendance::autoLeaveInactives();
-        })->everyMinute()->withoutOverlapping();
+        })->everyMinute()->name('job_autoLeaveInactives')->withoutOverlapping();
     }
 
     /**
