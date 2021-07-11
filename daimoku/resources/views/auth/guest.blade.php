@@ -27,7 +27,7 @@
 
                 <input type="hidden" name="user_id" value="{{ $guest->id }}">
 
-                <div class="flex items-center mt-4">
+                <div class="flex items-center mt-2">
                     <x-button class="ml-3">{{ $guest->name }}</x-button>
                 </div>
             </form>
