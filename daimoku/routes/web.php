@@ -36,3 +36,5 @@ Route::get('/sala/{room:slug}', [RoomController::class, 'show'])
 ->middleware(['auth']);
 
 require __DIR__.'/auth.php';
+
+require __DIR__.'/guest.php';
