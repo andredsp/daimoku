@@ -13,6 +13,11 @@ use Illuminate\Validation\Rules;
 
 class GuestController extends Controller
 {
+    private function guests()
+    {
+        return User::whereNull('email');
+    }
+
     /**
      * Display the guest login/registration view.
      *
@@ -20,7 +25,9 @@ class GuestController extends Controller
      */
     public function create()
     {
-        return view('auth.guest');
+        return view('auth.guest', [
+            'guests' => $this->guests()->get(),
+        ]);
     }
 
     /**
@@ -31,7 +38,7 @@ class GuestController extends Controller
      */
     public function login(Request $request)
     {
-        $guest = User::whereNull('email')->findOrFail($request->user_id);
+        $guest = $this->guests()->findOrFail($request->user_id);
         Auth::login($guest);
 
         $request->session()->regenerate();

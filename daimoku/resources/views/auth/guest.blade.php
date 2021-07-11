@@ -12,17 +12,20 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        {{-- Known Guests --}}
-        <form method="POST" action="{{ route('convidado') }}">
-            @method('PUT')
-            @csrf
+        @foreach ($guests as $guest)
 
-            <input type="hidden" name="user_id" value="4">
+            {{-- Known Guests --}}
+            <form method="POST" action="{{ route('convidado') }}">
+                @method('PUT')
+                @csrf
 
-            <div class="flex items-center justify-end mt-4">
-                <x-button class="ml-3">Dona Clotilde</x-button>
-            </div>
-        </form>
+                <input type="hidden" name="user_id" value="{{ $guest->id }}">
+
+                <div class="flex items-center justify-end mt-4">
+                    <x-button class="ml-3">{{ $guest->name }}</x-button>
+                </div>
+            </form>
+        @endforeach
 
         {{-- New Guest --}}
         <form method="POST" action="{{ route('convidado') }}">
