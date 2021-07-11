@@ -6,11 +6,17 @@
             </a>
         </x-slot>
 
+        <h1 class="text-center text-xl font-extrabold mb-4">Seja bem-vindo(a)!</h1>
+
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+        @if (count($guests) > 0)
+            <div class="mt-4">Procure seu nome na lista</div>
+        @endif
 
         @foreach ($guests as $guest)
 
@@ -21,35 +27,39 @@
 
                 <input type="hidden" name="user_id" value="{{ $guest->id }}">
 
-                <div class="flex items-center justify-end mt-4">
+                <div class="flex items-center mt-4">
                     <x-button class="ml-3">{{ $guest->name }}</x-button>
                 </div>
             </form>
         @endforeach
 
         {{-- New Guest --}}
+        @if (count($guests) > 0)
+            <div class="mt-4">Se não encontrar, digite abaixo</div>
+        @else
+            <div class="mt-4">Por favor, digite seu nome</div>
+        @endif
+
         <form method="POST" action="{{ route('convidado') }}">
             @csrf
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="name" class="block w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-1">
                 <x-button class="ml-3">Entrar como convidado</x-button>
             </div>
         </form>
 
-
-        <div class="flex items-center justify-end mt-4">
+        <div class="mt-8">Outras opções</div>
+        <div class="flex items-center">
             <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                Já possui cadastro?
+                Já tenho cadastro
             </a>
 
-            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 ml-3" href="{{ route('register') }}">
                 Novo usuário
             </a>
         </div>
